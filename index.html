@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD. Ahnaf Shahriar — Software Engineer</title>
+<meta name="description" content="Portfolio of MD. Ahnaf Shahriar — Software Engineering student, web developer and problem solver.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,440;0,9..144,560;0,9..144,650;1,9..144,440&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+============================================================ */
+:root{
+  --copper: #7C5295;
+  --copper-soft: rgba(124,82,149,.14);
+  --slate: #5C7A99;
+
+  /* dark (default) */
+  --bg: #0E1113;
+  --bg-raise: #15181B;
+  --surface: #191D20;
+  --surface-2: #1F2427;
+  --line: rgba(237,238,236,.09);
+  --line-strong: rgba(237,238,236,.16);
+  --text: #EDEEEC;
+  --text-muted: #93989D;
+  --text-faint: #5C6165;
+  --shadow: 0 24px 60px -24px rgba(0,0,0,.55);
+  --shadow-sm: 0 2px 10px rgba(0,0,0,.25);
+}
+
+html[data-theme="light"]{
+  --bg: #F7F4EE;
+  --bg-raise: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-2: #EFEAE0;
+  --line: rgba(20,18,14,.09);
+  --line-strong: rgba(20,18,14,.16);
+  --text: #1B1B18;
+  --text-muted: #6B6862;
+  --text-faint: #A29E93;
+  --shadow: 0 24px 60px -24px rgba(20,18,14,.18);
+  --shadow-sm: 0 2px 10px rgba(20,18,14,.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s ease, color .35s ease;
+  overflow-x:hidden;
+}
+
+::selection{background:var(--copper);color:#F4F0F7;}
+
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+button{font:inherit;cursor:pointer;background:none;border:none;color:inherit;}
+
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:2px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,48px);}
+
+/* type helpers */
+.serif{font-family:'Fraunces',serif;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+.label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--copper);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:500;
+}
+.label::before{
+  content:"";
+  width:16px;height:1px;
+  background:var(--copper);
+  display:inline-block;
+}
+
+.head{max-width:640px;margin-bottom:56px;}
+.head h2{
+  font-family:'Fraunces',serif;
+  font-weight:560;
+  font-size:clamp(1.9rem,3.4vw,2.6rem);
+  letter-spacing:-.01em;
+  margin-top:14px;
+  line-height:1.15;
+}
+.head p{color:var(--text-muted);margin-top:14px;font-size:1.02rem;line-height:1.6;}
+
+section{padding:clamp(72px,10vw,128px) 0;position:relative;}
+.divider{border-top:1px solid var(--line);}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.show{opacity:1;transform:translateY(0);}
+
+/* ============================================================
+   NAV
+============================================================ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  border-bottom:1px solid transparent;
+  transition:border-color .3s ease, background .3s ease, backdrop-filter .3s ease;
+}
+header.scrolled{
+  border-bottom-color:var(--line);
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(14px);
+}
+nav{
+  max-width:1180px;margin:0 auto;
+  padding:20px clamp(20px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-family:'Fraunces',serif;
+  font-weight:560;
+  font-size:1.18rem;
+  letter-spacing:-.01em;
+}
+.logo span{color:var(--copper);}
+
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none;}
+.nav-links a{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.74rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  padding:10px 16px;
+  position:relative;
+  transition:color .25s ease;
+}
+.nav-links a:hover{color:var(--text);}
+.nav-links a::after{
+  content:"";position:absolute;left:16px;right:16px;bottom:6px;height:1px;
+  background:var(--copper);transform:scaleX(0);transform-origin:left;
+  transition:transform .28s ease;
+}
+.nav-links a:hover::after{transform:scaleX(1);}
+
+.nav-right{display:flex;align-items:center;gap:10px;}
+
+.theme-toggle{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .25s ease, transform .25s ease;
+  color:var(--text);
+}
+.theme-toggle:hover{border-color:var(--copper);transform:rotate(-14deg);}
+.theme-toggle svg{width:17px;height:17px;}
+.theme-toggle .sun{display:none;}
+html[data-theme="light"] .theme-toggle .sun{display:block;}
+html[data-theme="light"] .theme-toggle .moon{display:none;}
+
+.resume-btn{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--copper);color:var(--copper);
+  padding:10px 20px;border-radius:2px;
+  transition:all .25s ease;
+}
+.resume-btn:hover{background:var(--copper);color:#F4F0F7;}
+
+.burger{
+  display:none;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line-strong);
+  align-items:center;justify-content:center;
+}
+.burger span{position:relative;width:16px;height:1px;background:var(--text);display:block;}
+.burger span::before,.burger span::after{
+  content:"";position:absolute;left:0;width:16px;height:1px;background:var(--text);transition:transform .25s ease, top .25s ease;
+}
+.burger span::before{top:-5px;}
+.burger span::after{top:5px;}
+.burger.open span{background:transparent;}
+.burger.open span::before{top:0;transform:rotate(45deg);}
+.burger.open span::after{top:0;transform:rotate(-45deg);}
+
+.mobile-menu{
+  display:none;
+  flex-direction:column;
+  border-top:1px solid var(--line);
+  background:var(--bg-raise);
+  padding:8px clamp(20px,4vw,48px) 22px;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  padding:14px 0;border-bottom:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace;font-size:.8rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);
+}
+.mobile-menu a:last-child{border-bottom:none;}
+
+@media (max-width:880px){
+  .nav-links,.resume-btn{display:none;}
+  .burger{display:flex;}
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding-top:120px;padding-bottom:60px;
+  position:relative;overflow:hidden;
+}
+.blueprint{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(circle at 78% 30%, black, transparent 62%);
+  mask-image:radial-gradient(circle at 78% 30%, black, transparent 62%);
+  opacity:.7;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr .8fr;gap:64px;
+  align-items:center;position:relative;z-index:2;
+}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:52px;}}
+
+.eyebrow-row{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+.eyebrow-row .dot{width:7px;height:7px;border-radius:50%;background:var(--copper);animation:pulse 2.2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-weight:560;
+  font-size:clamp(2.6rem,6.2vw,4.5rem);
+  line-height:1.03;
+  letter-spacing:-.02em;
+}
+.hero h1 em{
+  font-style:italic;font-weight:440;color:var(--copper);
+}
+
+.role-line{
+  margin-top:22px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:clamp(.95rem,1.6vw,1.15rem);
+  color:var(--text-muted);
+  display:flex;align-items:center;gap:2px;
+}
+.role-line .cursor{color:var(--copper);animation:blink 1s step-start infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+.hero p.lede{
+  margin-top:26px;max-width:520px;color:var(--text-muted);
+  font-size:1.05rem;line-height:1.75;
+}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px;}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:15px 26px;border-radius:2px;
+  transition:all .28s ease;
+}
+.btn-primary{background:var(--copper);color:#F4F0F7;font-weight:600;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(124,82,149,.45);}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--text);}
+.btn-ghost:hover{border-color:var(--copper);color:var(--copper);transform:translateY(-3px);}
+
+.hero-socials{
+  display:flex;gap:28px;margin-top:44px;flex-wrap:wrap;
+}
+.hero-socials a{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);
+  border-bottom:1px solid transparent;padding-bottom:3px;
+  transition:color .25s ease, border-color .25s ease;
+}
+.hero-socials a:hover{color:var(--copper);border-color:var(--copper);}
+
+/* portrait */
+.portrait-wrap{position:relative;display:flex;justify-content:center;}
+.portrait{
+  position:relative;width:min(360px,80vw);
+  border:1px solid var(--line-strong);
+  padding:14px;border-radius:4px;background:var(--surface);
+  box-shadow:var(--shadow);
+}
+.portrait img{width:100%;height:420px;object-fit:cover;filter:grayscale(18%) contrast(1.02);border-radius:2px;}
+.reticle{position:absolute;width:15px;height:15px;}
+.reticle::before,.reticle::after{content:"";position:absolute;background:var(--copper);}
+.reticle::before{width:100%;height:1px;top:0;left:0;}
+.reticle::after{width:1px;height:100%;top:0;left:0;}
+.r-tl{top:-1px;left:-1px;}
+.r-tr{top:-1px;right:-1px;transform:scaleX(-1);}
+.r-bl{bottom:-1px;left:-1px;transform:scaleY(-1);}
+.r-br{bottom:-1px;right:-1px;transform:scale(-1,-1);}
+
+.fig-tag{
+  position:absolute;bottom:-16px;left:28px;
+  background:var(--bg);border:1px solid var(--line-strong);
+  padding:6px 14px;font-family:'IBM Plex Mono',monospace;
+  font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);
+}
+
+.scroll-cue{
+  position:absolute;left:50%;bottom:28px;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);
+  z-index:2;
+}
+.scroll-cue .line{width:1px;height:34px;background:linear-gradient(var(--copper),transparent);animation:drop 1.8s ease-in-out infinite;}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}50.01%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+@media (max-width:700px){.scroll-cue{display:none;}}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+.about-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:72px;align-items:start;}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr;gap:44px;}}
+
+.about-frame{
+  border:1px solid var(--line-strong);padding:12px;border-radius:4px;
+  background:var(--surface);box-shadow:var(--shadow-sm);position:relative;
+}
+.about-frame img{width:100%;height:400px;object-fit:cover;object-position:top;filter:grayscale(18%);border-radius:2px;}
+
+.about-copy p{color:var(--text-muted);font-size:1.05rem;line-height:1.85;max-width:600px;}
+
+.fact-grid{
+  margin-top:40px;
+  display:grid;grid-template-columns:repeat(2,1fr);
+  border-top:1px solid var(--line);border-left:1px solid var(--line);
+}
+.fact{
+  padding:20px 22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.fact .k{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--copper);}
+.fact .v{margin-top:8px;font-weight:600;font-size:.98rem;word-break:break-word;}
+
+.dl-btn{
+  margin-top:36px;
+}
+
+/* ============================================================
+   SKILLS
+============================================================ */
+.skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);}
+@media (max-width:760px){.skill-cols{grid-template-columns:1fr;}}
+.skill-col{padding:32px 30px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+.skill-col h3{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text-faint);margin-bottom:22px;
+}
+.skill-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);}
+.skill-item:last-child{border-bottom:none;}
+.skill-item .name{font-weight:500;font-size:.96rem;}
+.meter{display:flex;gap:4px;}
+.meter i{width:6px;height:6px;border-radius:50%;background:var(--line-strong);}
+.meter i.on{background:var(--copper);}
+
+/* ============================================================
+   SERVICES
+============================================================ */
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+@media (max-width:960px){.card-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.card-grid{grid-template-columns:1fr;}}
+.service-card{
+  background:var(--bg);padding:34px 28px;transition:background .3s ease, transform .3s ease;
+}
+.service-card:hover{background:var(--surface);transform:translateY(-4px);}
+.service-card .num{font-family:'IBM Plex Mono',monospace;color:var(--copper);font-size:.75rem;letter-spacing:.08em;}
+.service-card h3{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:560;margin-top:16px;}
+.service-card p{color:var(--text-muted);font-size:.92rem;line-height:1.7;margin-top:12px;}
+
+/* ============================================================
+   PROJECTS
+============================================================ */
+.project-list{display:flex;flex-direction:column;}
+.project-row{
+  display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;
+  padding:44px 0;border-bottom:1px solid var(--line);align-items:center;
+}
+.project-row:first-child{border-top:1px solid var(--line);}
+@media (max-width:820px){.project-row{grid-template-columns:1fr;gap:26px;}}
+
+.proj-media{
+  position:relative;border:1px solid var(--line-strong);border-radius:4px;overflow:hidden;
+  background:var(--surface);
+}
+.proj-media img{width:100%;height:280px;object-fit:cover;filter:grayscale(12%);transition:transform .6s ease, filter .4s ease;}
+.project-row:hover .proj-media img{transform:scale(1.045);filter:grayscale(0%);}
+
+.proj-index{font-family:'IBM Plex Mono',monospace;color:var(--copper);font-size:.75rem;letter-spacing:.1em;}
+.proj-body h3{font-family:'Fraunces',serif;font-weight:560;font-size:1.7rem;margin-top:14px;letter-spacing:-.01em;}
+.proj-body p{color:var(--text-muted);margin-top:14px;line-height:1.75;max-width:480px;}
+.proj-links{display:flex;gap:22px;margin-top:22px;}
+.proj-links a{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text);border-bottom:1px solid var(--line-strong);padding-bottom:3px;
+  transition:color .25s ease,border-color .25s ease;
+}
+.proj-links a:hover{color:var(--copper);border-color:var(--copper);}
+
+/* ============================================================
+   STATS BAND
+============================================================ */
+.stats-band{background:var(--copper);color:#F4F0F7;}
+.stats-band .wrap{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  padding:56px 0;text-align:center;
+}
+@media (max-width:700px){.stats-band .wrap{grid-template-columns:repeat(2,1fr);}}
+.stat h3{font-family:'Fraunces',serif;font-weight:650;font-size:clamp(2rem,4vw,3rem);}
+.stat p{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.75;}
+
+/* ============================================================
+   TIMELINE (education + experience)
+============================================================ */
+.timeline{position:relative;padding-left:34px;}
+.timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line-strong);}
+.t-item{position:relative;padding-bottom:44px;}
+.t-item:last-child{padding-bottom:0;}
+.t-item::before{
+  content:"";position:absolute;left:-34px;top:5px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--copper);
+}
+.t-item .date{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);}
+.t-item h3{font-family:'Fraunces',serif;font-weight:560;font-size:1.3rem;margin-top:10px;}
+.t-item .org{color:var(--text-muted);margin-top:4px;font-size:.94rem;}
+.t-item .desc{color:var(--text-muted);margin-top:10px;font-size:.92rem;line-height:1.7;max-width:560px;}
+
+.two-col-tl{display:grid;grid-template-columns:1fr 1fr;gap:72px;}
+@media (max-width:860px){.two-col-tl{grid-template-columns:1fr;gap:56px;}}
+.two-col-tl h4{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-faint);margin-bottom:30px;
+}
+
+/* ============================================================
+   CERTIFICATES
+============================================================ */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+@media (max-width:820px){.cert-grid{grid-template-columns:1fr;}}
+.cert-card{
+  border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--surface);
+  transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.cert-card:hover{transform:translateY(-6px);border-color:var(--copper);box-shadow:var(--shadow-sm);}
+.cert-img{height:170px;overflow:hidden;border-bottom:1px solid var(--line);}
+.cert-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%);}
+.cert-body{padding:20px 22px;}
+.cert-body h4{font-family:'Fraunces',serif;font-size:1.02rem;font-weight:560;line-height:1.3;}
+.cert-meta{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
+.cert-meta span{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);}
+.cert-meta .verified{color:var(--copper);}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr;gap:44px;}}
+.contact-copy p{color:var(--text-muted);line-height:1.8;font-size:1.02rem;max-width:420px;}
+.contact-direct{margin-top:32px;display:flex;flex-direction:column;gap:16px;}
+.contact-direct a{
+  font-family:'IBM Plex Mono',monospace;font-size:.85rem;
+  display:flex;align-items:center;gap:12px;color:var(--text);
+}
+.contact-direct a .k{color:var(--text-faint);width:70px;flex-shrink:0;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
+.contact-direct a:hover{color:var(--copper);}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media (max-width:520px){.form-grid{grid-template-columns:1fr;}}
+.field{margin-bottom:18px;}
+.field label{
+  display:block;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-faint);margin-bottom:8px;
+}
+.field input,.field textarea{
+  width:100%;background:transparent;border:none;border-bottom:1px solid var(--line-strong);
+  padding:10px 2px;color:var(--text);font-family:'Inter',sans-serif;font-size:.98rem;
+  transition:border-color .25s ease;
+}
+.field textarea{resize:vertical;min-height:100px;}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--copper);}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-faint);}
+
+.submit-row{display:flex;align-items:center;gap:20px;margin-top:8px;}
+#success-msg{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--copper);opacity:0;transition:opacity .3s ease;}
+#success-msg.show{opacity:1;}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{border-top:1px solid var(--line);padding:48px 0;}
+.foot-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.foot-grid .logo{font-size:1rem;}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap;}
+.foot-links a{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);transition:color .25s ease;}
+.foot-links a:hover{color:var(--copper);}
+.foot-note{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-faint);}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header id="site-header">
+  <nav>
+    <a href="#home" class="logo">Ahnaf <span>Shahriar</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark mode">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      </button>
+      <a class="resume-btn" href="file/CV of MD. AHNAF SHAHRIAR.pdf">Résumé</a>
+      <button class="burger" id="burger" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+    <a href="file/CV of MD. AHNAF SHAHRIAR.pdf">Résumé ↓</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+  <div class="blueprint"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-row">
+        <span class="dot"></span>
+        <span class="label">Available for opportunities</span>
+      </div>
+      <h1>MD. Ahnaf<br><em>Shahriar</em></h1>
+      <div class="role-line"><span id="typed-role"></span><span class="cursor">_</span></div>
+      <p class="lede">A Software Engineering student building considered, functional interfaces — across web development, Python, and applied AI. I like problems with a clean solution underneath the mess.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Start a Project</a>
+        <a href="#projects" class="btn btn-ghost">View Work</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://github.com/AQTxAHNAF" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/muhammad-ahnaf-shahriar-nishan-3a4a913a5/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.facebook.com/muhammad.ahnaf.shahriar.nishan">Facebook</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shahriar242-35-445@diu.edu.bd" target="_blank" rel="noopener noreferrer">Email</a>
+      </div>
+    </div>
+    <div class="portrait-wrap">
+      <div class="portrait">
+        <span class="reticle r-tl"></span><span class="reticle r-tr"></span>
+        <span class="reticle r-bl"></span><span class="reticle r-br"></span>
+        <img src="images/Ahnaf SN.png" alt="Portrait of MD. Ahnaf Shahriar">
+        <div class="fig-tag">Fig. 01 — Portrait</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="divider">
+  <div class="wrap reveal">
+    <span class="label">§ About</span>
+    <div class="about-grid" style="margin-top:14px;">
+      <div class="about-frame">
+        <img src="images/Ahnaf SN 2.jpg" alt="MD. Ahnaf Shahriar">
+      </div>
+      <div class="about-copy">
+        <h2 class="serif" style="font-size:clamp(1.7rem,3vw,2.3rem);font-weight:560;letter-spacing:-.01em;">Precision-minded, curiosity-driven.</h2>
+        <p style="margin-top:20px;">I'm a Software Engineering student with a strong interest in software development, web development, Python programming, artificial intelligence, and problem solving. I enjoy building modern, responsive interfaces and treating every project as a chance to learn something I didn't know how to do the week before.</p>
+
+        <div class="fact-grid">
+          <div class="fact"><div class="k">Name</div><div class="v">MD. Ahnaf Shahriar</div></div>
+          <div class="fact"><div class="k">Location</div><div class="v">Bangladesh</div></div>
+          <div class="fact"><div class="k">Email</div><div class="v">shahriar242-35-445@diu.edu.bd</div></div>
+          <div class="fact"><div class="k">Phone</div><div class="v">+880 1409034008</div></div>
+        </div>
+
+        <a href="file/CV of MD. AHNAF SHAHRIAR.pdf" download class="btn btn-primary dl-btn">Download CV</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills" class="divider">
+  <div class="wrap reveal">
+    <span class="label">§ Stack</span>
+    <div class="head" style="margin-bottom:0;">
+      <h2>Tools I reach for.</h2>
+      <p>Grouped by how I actually use them day to day, not a leaderboard.</p>
+    </div>
+
+    <div class="skill-cols" style="margin-top:48px;">
+      <div class="skill-col">
+        <h3>Markup &amp; Style</h3>
+        <div class="skill-item"><span class="name">HTML</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+        <div class="skill-item"><span class="name">CSS</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+        <div class="skill-item"><span class="name">Tailwind CSS</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      </div>
+      <div class="skill-col">
+        <h3>Languages</h3>
+        <div class="skill-item"><span class="name">JavaScript</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <div class="skill-item"><span class="name">Python</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+        <div class="skill-item"><span class="name">C &amp; C++</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+      </div>
+      <div class="skill-col">
+        <h3>Tooling</h3>
+        <div class="skill-item"><span class="name">Git &amp; GitHub</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <div class="skill-item"><span class="name">Django</span><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+        <div class="skill-item"><span class="name">Data Analysis</span><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="divider">
+  <div class="wrap reveal">
+    <span class="label">§ Services</span>
+    <div class="head" style="margin-bottom:0;">
+      <h2>What I do.</h2>
+      <p>Four disciplines I bring to every build, from first sketch to shipped product.</p>
+    </div>
+  </div>
+  <div class="wrap reveal" style="margin-top:48px;">
+    <div class="card-grid">
+      <div class="service-card">
+        <span class="num">01</span>
+        <h3>Web Design</h3>
+        <p>Modern, user-friendly interfaces tailored for personal and business needs.</p>
+      </div>
+      <div class="service-card">
+        <span class="num">02</span>
+        <h3>Frontend</h3>
+        <p>Responsive builds with HTML, CSS, JavaScript, and Tailwind CSS.</p>
+      </div>
+      <div class="service-card">
+        <span class="num">03</span>
+        <h3>Backend</h3>
+        <p>Python and Django-based applications and API architecture.</p>
+      </div>
+      <div class="service-card">
+        <span class="num">04</span>
+        <h3>Responsive Layout</h3>
+        <p>Mobile, tablet, and desktop-friendly systems built for real usability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="divider">
+  <div class="wrap reveal">
+    <span class="label">§ Selected Work</span>
+    <div class="head" style="margin-bottom:0;">
+      <h2>Featured Projects</h2>
+      <p>A few things I've built recently, spanning full-stack, frontend, and systems programming.</p>
+    </div>
+
+    <div class="project-list" style="margin-top:16px;">
+
+      <div class="project-row">
+        <div class="proj-media"><img src="images/Screenshot 2026-08-13 012430.png" alt="Portfolio Website project"></div>
+        <div class="proj-body">
+          <span class="proj-index">Project — 01</span>
+          <h3>Portfolio Website</h3>
+          <p>A modern, responsive personal portfolio built with HTML, CSS, JavaScript and Tailwind CSS.</p>
+          <div class="proj-links">
+            <a href="#">Live Demo</a>
+            <a href="https://github.com/jobairislam155/My-portfolio-" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="proj-media"><img src="images/1628753967131.png" alt="CollabCore project"></div>
+        <div class="proj-body">
+          <span class="proj-index">Project — 02</span>
+          <h3>CollabCore: Academia Bridge</h3>
+          <p>A web-based platform designed to strengthen collaboration between universities, students, and industry.</p>
+          <div class="proj-links">
+            <a href="#">Live Demo</a>
+            <a href="#">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="proj-media"><img src="images/HIMS7.webp" alt="Hospital Patient Management System project"></div>
+        <div class="proj-body">
+          <span class="proj-index">Project — 03</span>
+          <h3>Hospital Patient Management System</h3>
+          <p>A console-based system built in C to streamline the management of patient records and hospital operations.</p>
+          <div class="proj-links">
+            <a href="#">Live Demo</a>
+            <a href="#">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats-band" style="padding:0;">
+  <div class="wrap">
+    <div class="stat"><h3>5+</h3><p>Projects Completed</p></div>
+    <div class="stat"><h3>5+</h3><p>Technologies</p></div>
+    <div class="stat"><h3>2+</h3><p>Years Learning</p></div>
+    <div class="stat"><h3>100%</h3><p>Responsive Design</p></div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION + EXPERIENCE ================= -->
+<section id="education" class="divider">
+  <div class="wrap reveal">
+    <span class="label">§ Background</span>
+    <div class="head" style="margin-bottom:0;">
+      <h2>Education &amp; Experience</h2>
+      <p>The academic path and hands-on work behind the projects above.</p>
+    </div>
+
+    <div class="two-col-tl" style="margin-top:52px;">
+      <div>
+        <h4>Education</h4>
+        <div class="timeline">
+          <div class="t-item">
+            <span class="date">Jul 2024 — Present</span>
+            <h3>B.Sc. in Software Engineering</h3>
+            <p class="org">Daffodil International University</p>
+          </div>
+          <div class="t-item">
+            <span class="date">2022 — 2024</span>
+            <h3>Higher Secondary Certificate (HSC)</h3>
+            <p class="org">Jahangirnagar University School and College — Science</p>
+          </div>
+          <div class="t-item">
+            <span class="date">2020 — 2022</span>
+            <h3>Secondary School Certificate (SSC)</h3>
+            <p class="org">Jahangirnagar University School and College — Science</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4>Experience</h4>
+        <div class="timeline">
+          <div class="t-item">
+            <span class="date">Internship</span>
+            <h3>Software Development Intern</h3>
+            <p class="org">Brainstation23.com</p>
+            <p class="desc">Worked on web development, software projects and programming tasks using modern development stacks.</p>
+          </div>
+          <div class="t-item">
+            <span class="date">Self-directed</span>
+            <h3>Personal Projects</h3>
+            <p class="org">Self Learning</p>
+            <p class="desc">Built multiple full-stack and frontend projects using modern web technologies and core programming languages.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CERTIFICATES ================= -->
+<section id="certificates" class="divider">
+  <div class="wrap reveal">
+    <span class="label">§ Certificates</span>
+    <div class="head" style="margin-bottom:0;">
+      <h2>Verified Coursework</h2>
+      <p>Continuous learning, documented.</p>
+    </div>
+
+    <div class="cert-grid" style="margin-top:48px;">
+      <div class="cert-card">
+        <div class="cert-img"><img src="images/Data Science.png" alt="Python Basics for Data Science certificate"></div>
+        <div class="cert-body">
+          <h4>Introduction to Python Basics for Data Science</h4>
+          <div class="cert-meta"><span>AIVANTAGE</span><span class="verified">Verified</span></div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-img"><img src="images/OOP Online Course Certificate.jpeg" alt="OOP in Java certificate"></div>
+        <div class="cert-body">
+          <h4>Object Oriented Programming in Java</h4>
+          <div class="cert-meta"><span>Simplilearn Skillup</span><span class="verified">Verified</span></div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-img"><img src="images/Data Analysis.png" alt="Exploratory Data Analysis certificate"></div>
+        <div class="cert-body">
+          <h4>Introduction to Exploratory Data Analysis</h4>
+          <div class="cert-meta"><span>INSPIRE AI</span><span class="verified">Verified</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="divider">
+  <div class="wrap reveal">
+    <span class="label">§ Contact</span>
+    <div class="head" style="margin-bottom:0;">
+      <h2>Let's build something.</h2>
+      <p>Have a project in mind, or just want to talk shop? My inbox is open.</p>
+    </div>
+
+    <div class="contact-grid" style="margin-top:52px;">
+      <div class="contact-copy">
+        <p>Whether it's a full-stack build, a frontend refresh, or a question about a project above — I read every message and reply personally.</p>
+        <div class="contact-direct">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shahriar242-35-445@diu.edu.bd" target="_blank" rel="noopener noreferrer"><span class="k">Email</span> shahriar242-35-445@diu.edu.bd</a>
+          <a href="tel:+8801409034008"><span class="k">Phone</span> +880 1409034008</a>
+          <a href="https://www.linkedin.com/in/muhammad-ahnaf-shahriar-nishan-3a4a913a5/" target="_blank" rel="noopener noreferrer"><span class="k">LinkedIn</span> /in/Ahnaf_SN</a>
+          <a href="https://github.com/AQTxAHNAF" target="_blank" rel="noopener noreferrer"><span class="k">GitHub</span> /Ahnaf_SN445</a>
+        </div>
+      </div>
+
+      <form action="https://formsubmit.co/shahriar242-35-445@diu.edu.bd" method="POST" id="contact-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" type="email" name="email" placeholder="you@email.com" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-subject">Subject</label>
+          <input id="f-subject" type="text" name="subject" placeholder="What's this about?">
+        </div>
+        <div class="field">
+          <label for="f-message">Message</label>
+          <textarea id="f-message" name="message" placeholder="Tell me a bit about it..." required></textarea>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <span id="success-msg">Message sent — thank you.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-grid">
+    <a href="#home" class="logo">Ahnaf <span>Shahriar</span></a>
+    <div class="foot-links">
+      <a href="https://github.com/AQTxAHNAF" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/muhammad-ahnaf-shahriar-nishan-3a4a913a5/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.facebook.com/muhammad.ahnaf.shahriar.nishan" target="_blank" rel="noopener noreferrer">Facebook</a>
+    </div>
+    <span class="foot-note">© <span id="year"></span> MD. Ahnaf Shahriar. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* THEME TOGGLE (in-memory, defaults to dark) */
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('theme-toggle');
+  themeBtn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+  });
+
+  /* HAMBURGER MENU */
+  var burger = document.getElementById('burger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', function(){
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  /* SMOOTH SCROLL (native scroll-behavior handles most; this closes menu / offsets fixed header) */
+  document.querySelectorAll('a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var id = this.getAttribute('href');
+      if(id.length < 2) return;
+      var target = document.querySelector(id);
+      if(target){
+        e.preventDefault();
+        var top = target.getBoundingClientRect().top + window.pageYOffset - 84;
+        window.scrollTo({top: top, behavior: 'smooth'});
+      }
+    });
+  });
+
+  /* HEADER SCROLLED STATE */
+  var header = document.getElementById('site-header');
+  function onScroll(){
+    if(window.scrollY > 12){ header.classList.add('scrolled'); }
+    else{ header.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  /* TYPED ROLE EFFECT */
+  var typedEl = document.getElementById('typed-role');
+  var roles = ['Software Developer', 'Web Developer', 'Problem Solver', 'CSE Student'];
+  var ri = 0, ci = 0, deleting = false;
+  function typeLoop(){
+    var current = roles[ri];
+    if(!deleting){
+      typedEl.textContent = current.slice(0, ci + 1);
+      ci++;
+      if(ci === current.length){ deleting = true; setTimeout(typeLoop, 1500); return; }
+    } else {
+      typedEl.textContent = current.slice(0, ci - 1);
+      ci--;
+      if(ci === 0){ deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(typeLoop, deleting ? 40 : 85);
+  }
+  typeLoop();
+
+  /* CONTACT FORM (demo submit) */
+  var form = document.getElementById('contact-form');
+  var successMsg = document.getElementById('success-msg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    successMsg.classList.add('show');
+    form.reset();
+    setTimeout(function(){ successMsg.classList.remove('show'); }, 4000);
+  });
+
+  /* SCROLL REVEAL */
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('show'); }
+    });
+  }, {threshold: 0.12});
+  revealEls.forEach(function(el){ io.observe(el); });
+
+  /* FOOTER YEAR */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+})();
+</script>
+
+</body>
+</html>
